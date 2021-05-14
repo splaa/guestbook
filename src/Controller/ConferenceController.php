@@ -8,11 +8,16 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ConferenceController extends AbstractController
 {
-    #[Route('/conference', name: 'conference')]
-    public function index(): Response
+    #[Route('/hello/{name}', name: 'homepage')]
+    public function index(string $name = 'People'): Response
     {
+        $greet = '';
+        if ($name ) {
+            $greet = sprintf('%s', htmlspecialchars($name));
+        }
         return $this->render('conference/index.html.twig', [
             'controller_name' => 'ConferenceController',
+            'greet' => $greet,
         ]);
     }
 }
