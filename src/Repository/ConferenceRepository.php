@@ -19,6 +19,8 @@ class ConferenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Conference::class);
     }
 
+
+
     // /**
     //  * @return Conference[] Returns an array of Conference objects
     //  */
