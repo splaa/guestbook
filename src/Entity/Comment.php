@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CommentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=CommentRepository::class)
@@ -15,33 +16,33 @@ class Comment
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $author;
+    private $author;
 
     /**
      * @ORM\Column(type="text")
      */
-    private ?string $text;
+    private $text;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $email;
+    private $email;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?\DateTimeInterface $createAt;
+    private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Conference::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
-    private ?Conference $conference;
+    private $conference;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -89,14 +90,14 @@ class Comment
         return $this;
     }
 
-    public function getCreateAt(): ?\DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->createAt;
+        return $this->createdAt;
     }
 
-    public function setCreateAt(\DateTimeInterface $createAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->createAt = $createAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -124,4 +125,10 @@ class Comment
 
         return $this;
     }
+
+    #[Pure] public function __toString(): string
+    {
+        return (string)$this->getEmail();
+    }
+
 }
